@@ -1275,3 +1275,187 @@ class GateKeeper extends React.Component {
   }
 };
 
+
+// React: Use Array.map() to Dynamically Render Elements
+const textAreaStyles = {
+  width: 235,
+  margin: 5
+};
+
+class MyToDoList extends React.Component {
+  constructor(props) {
+    super(props);
+    // change code below this line
+    this.state = {
+      userInput: '',
+      toDoList: []
+    }
+    // change code above this line
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleSubmit() {
+    const itemsArray = this.state.userInput.split(',');
+    this.setState({
+      toDoList: itemsArray
+    });
+  }
+  handleChange(e) {
+    this.setState({
+      userInput: e.target.value
+    });
+  }
+  render() {
+    // change code here
+    // Note this code
+    const items = this.state.toDoList.map((items) => 
+      <li>{items}</li>
+    ); 
+    return (
+      <div>
+        <textarea
+          onChange={this.handleChange}
+          value={this.state.userInput}
+          style={textAreaStyles}
+          placeholder="Separate Items With Commas" /><br />
+        <button onClick={this.handleSubmit}>Create List</button>
+        <h1>My "To Do" List:</h1>
+        <ul>
+          {items}
+        </ul>
+      </div>
+    );
+  }
+};
+
+
+// React: Give Sibling Elements a Unique Key Attribute
+const frontEndFrameworks = [
+  'React',
+  'Angular',
+  'Ember',
+  'Knockout',
+  'Backbone',
+  'Vue'
+];
+
+function Frameworks() {
+  // change code here
+  const renderFrameworks = frontEndFrameworks.map(
+    (items) => <li key = {items.toString()}>{items}</li>
+  ); 
+  return (
+    <div>
+      <h1>Popular Front End JavaScript Frameworks</h1>
+      <ul>
+        {renderFrameworks}
+      </ul>
+    </div>
+  );
+};
+
+// React: Use Array.filter() to Dynamically Filter an Array
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [
+        {
+          username: 'Jeff',
+          online: true
+        },
+        {
+          username: 'Alan',
+          online: false
+        },
+        {
+          username: 'Mary',
+          online: true
+        },
+        {
+          username: 'Jim',
+          online: false
+        },
+        {
+          username: 'Sara',
+          online: true
+        },
+        {
+          username: 'Laura',
+          online: true
+        }
+      ]
+    }
+  }
+  render() {
+    const usersOnline = this.state.users.filter(user => user.online); // change code here
+    const renderOnline = usersOnline.map((user) => <li  key = {user.username.toString()}>{user.username}</li>); 
+    // change code here
+    return (
+       <div>
+         <h1>Current Online Users:</h1>
+         <ul>
+           {renderOnline}
+         </ul>
+       </div>
+    );
+  }
+};
+
+// React: Render React on the Server with renderToString
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <div/>
+  }
+};
+
+// change code below this line
+ReactDOMServer.renderToString(<App/>);
+
+// React: Render Conditionally from Props
+class Results extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const { fiftyFifty } = this.props;
+    return (
+      <h1>
+      {
+        /* change code here */
+          fiftyFifty ? "You win!" : "you lose!"
+      }
+      </h1>
+    )
+  };
+};
+
+class GameOfChance extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 1
+    }
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState({
+      counter: this.state.counter + 1 // change code here
+    });
+  }
+  render() {
+    let expression = Math.random() > .5; // change code here
+    return (
+      <div>
+        <button onClick={this.handleClick}>Play Again</button>
+        { /* change code below this line */ }
+        <Results fiftyFifty={expression} />
+        { /* change code above this line */ }
+        <p>{'Turn: ' + this.state.counter}</p>
+      </div>
+    );
+  }
+};
